@@ -1,0 +1,20 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+</head>
+
+<body>
+    
+    <h1>Login</h1>
+    <% if (err) { %>
+        <div style="color: red;"><%= err %></div>
+    <% } %>
+    <form action="/login" method="POST">
+        <input placeholder="Email" name="email" type="email" required />
+        <input placeholder="Password" name="password" type="password" required />
+        <button>Login</button>
+    </form>
+    <a href="forgot_password.html">Forgot Password ?</a>
+</body>

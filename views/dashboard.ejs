@@ -1,0 +1,40 @@
+
+<%- include('partials/head')%>
+<link rel="stylesheet" href="/styles/dashboard.css">
+
+<body class="box">
+    <main>
+        <% students.forEach(function(student, index) { %>
+            <div class="basic">
+                <p><b>Name :</b> <%= student.student_name %></p>
+                <p><b>Roll Number :</b> <%= student.id %></p>
+            </div>
+        <% }); %>
+
+        <div>
+            <h2>Courses</h2>
+            <p>You are enrolled in these courses:</p>
+            <ul>
+                <li><%= students[0]?.course || "N/A" %></li>
+                <li><%= students[0]?.courses || "N/A" %></li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Attendance</h2>
+            <table class="attend-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Course</th>
+                        <th>Present</th>
+                        <th>Absent</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </main>
+</body>
+
+    <%- include('partials/footer')%>
+   

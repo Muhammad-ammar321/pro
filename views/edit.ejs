@@ -1,0 +1,56 @@
+ <%- include('partials/head')%>
+ <link rel="stylesheet" href="/styles/edit.css">
+    <body class="box">
+              
+        <form action="#" method="patch"> 
+            <h1>Student Profile</h1>
+
+            <figure>
+                <h2>Student Picture</h2>
+                <img  src="https://img.icons8.com/color/27/test-account.png" alt="student-image" class="stud-pic" />
+                <input type="file" >
+            </figure>
+            <article>
+                <h2>Personal Information</h2>
+                
+                <label for="stud-name"><b>Full Name:</b></label>
+                <input type="text" id="stud-name" value="<%= student_name %>" placeholder="Enter your Full Name" />
+                
+                <label for="father-name.name"><b>Father Name:</b></label>
+                <input type="text" id="father-name" value="<%= father_name %>" placeholder="Enter your Father Name" />
+                
+                <label for="roll-number"></label><b>Roll Number:</b>
+                <input type="number" id="roll-number" value="<%= id %>" placeholder="Enter your Roll Number" />
+                
+                <label for="D.O.B"></label><b>Date Of Birth:</b>
+                <input type="text" id="D.O.B" value="<%= D_O_B %>" placeholder="Enter your Date of Birth" />
+                
+                <label for="cnic"><b>CNIC / B-Form:</b></label>
+                <input type="number" id="cinc" value="<%= cnic %>" placeholder="Enter your CNIC / B-Form" />
+                
+                <label for="email"><b>Email:</b></label>
+                <input type="email" id="email"  value="<%= email %>" placeholder="Enter your Email" />
+                
+                <label for="phone"><b>Contact Number:</b></label>
+                <input type="number" id="phone" value="<%= phone_number %>" placeholder="Enter your Phone Number" />
+            </article>
+
+            <article>
+                    <h2>Student Data</h2>
+                <figure>
+                    <h3>Matric Marksheet</h3>
+                    <img src="" alt="matric-marksheet" />
+                    <input type="file">
+                </figure>
+                <figure>
+                    <h3>Intermediate Marksheet</h3>
+                    <img src="" alt="intermediate-marksheet" />
+                    <input type="file">
+                </figure>
+            </article>
+
+            <input id="edit-form" type="submit" value="Submit" />
+        </form>
+
+    <%- include('partials/footer')%>
+   

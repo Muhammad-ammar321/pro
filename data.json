@@ -1,0 +1,26 @@
+{
+    "students": [
+        {
+            "id": 12,
+            "student_name": "stude",
+            "father_name": "fathe",
+            "cnic": "1234",
+            "D_O_B": "1-2-5",
+            "email": "dsa@fsa.com",
+            "password": "1234",
+            "phone_number": "098764322",
+            "course": "psdc"
+        },
+        {
+            "id": 1,
+            "student_name": "sstude",
+            "father_name": "fatshe",
+            "cnic": "12342",
+            "D_O_B": "1-2-45",
+            "email": "asd@fsa.com",
+            "password": "1234",
+            "phone_number": "098764322",
+            "course": "psdc"
+        }
+    ]
+}
