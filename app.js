@@ -36,6 +36,7 @@ app.post('/student/profile',login.attemp)
 
 
 
+
 // GET single student by id
 app.get("/student/:id", async (req, res) => {
     try {
