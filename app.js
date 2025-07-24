@@ -2,10 +2,14 @@
 const express = require("express");
 const fs = require("fs/promises");
 const path = require("path");
+const login= require("./controller/loginController")
+const get = require('./controller/dashboardController')
+
 
 const app = express();
 const PORT = 3000;
 const dataPath = path.join(__dirname, "data.json");
+// console.log(login.attemp())
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,42 +27,13 @@ const writeData = async (data) => {
 };
 
 // GET all students
-app.get("/students", async (req, res) => {
-    try {
-        const data = await readData();
-        const students = data.students.filter(s => !s.deleted_at);
-        res.render("dashboard", { students });
-    } catch (err) {
-        res.status(500).send("Error reading student data.");
-    }
-});
-
+app.get("/student",get.dashboard)
+app.get('/student/profile',get.profile)
 //login
-app.get('/login',(req,res)=>{
-    res.render('login',{err:null})
-})
-app.post('/login', async (req, res) => {
-    try {
-        const data = await readData();
-        const { email, password } = req.body || {};
-        console.log(email, password);
+app.get('/login',login.page,)
+app.post('/student',login.attemp );
+app.post('/student/profile',login.attemp)
 
-        if (!email || !password) {
-            return res.status(400).send("Requirement not filled");
-        }
-
-        const stud = data.students.find(s => s.email === email.trim() && s.password === password.trim());
-        console.log(stud);
-
-        if (stud) {
-            res.render('user', stud);
-        } else {
-             err = res.status(401).render('login',{err:"Incorrect username or password"});
-        }
-    } catch  {
-        return res.status(500).send("An error occurred while processing your request");
-    }
-});
 
 
 // GET single student by id
@@ -83,13 +58,15 @@ app.post("/student", async (req, res) => {
 });
 
 // Edit form
-app.get("/student/edit/:id", async (req, res) => {
+app.get("/student/edit/:id",
+     async (req, res) => {
     const data = await readData();
     const student = data.students.find(s => s.id === req.params.id);
     console.log(student)
     if (!student) return res.status(404).send("Student not found");
     res.render("edit", { student });
-});
+}
+);
 
 
 // Update student
@@ -116,3 +93,55 @@ app.delete("/student/:id", async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+
+
+
+
+
+
+
+//commited code
+
+
+// login get and post
+// (req,res)=>{
+    // res.render('login',{err:null})}
+//     async (req, res) => {
+//     try {
+    //         const data = await readData();
+    //         const { email, password } = req.body || {};
+//         console.log(email, password);
+
+//         if (!email || !password) {
+    //             return res.status(400).send("Requirement not filled");
+//         }
+
+//         const stud = data.students.find(s => s.email === email.trim() && s.password === password.trim());
+//         console.log(stud);
+
+//         if (stud) {
+    //             res.render('dashboard', stud);
+//         } else {
+//              err = res.status(401).render('login',{err:"Incorrect username or password"});
+//         }
+//     } catch  {
+    //         return res.status(500).send("An error occurred while processing your request");
+//     }
+
+
+// show dashboard
+    //  async (req, res) => {
+    //     try {
+    //         const data = await readData();
+    //         const students = data.students.filter(s => !s.deleted_at);
+    //         const student = students.find(s => s.email === email.trim() && s.password === password.trim());
+    //         console.log(student)
+    //         res.render("dashboard", student );
+    //     } catch (err) {
+    //         res.status(500).send("Error reading student data.");
+    //     }
+    // }
+    // );
+// }
