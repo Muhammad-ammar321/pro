@@ -1,15 +1,25 @@
 {
-  "name": "pro-main",
+  "name": "pro",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/Muhammad-ammar321/pro#readme",
+  "bugs": {
+    "url": "https://github.com/Muhammad-ammar321/pro/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Muhammad-ammar321/pro.git"
+  },
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch app.js"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2"

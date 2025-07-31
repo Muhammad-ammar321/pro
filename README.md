@@ -1,1 +1,1 @@
-# pro
+This app do all curd operation expect delete

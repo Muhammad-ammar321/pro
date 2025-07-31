@@ -1,97 +1,53 @@
-
 const express = require("express");
-const fs = require("fs/promises");
+// const fs = require("fs/promises");
 const path = require("path");
-const login= require("./controller/loginController")
-const get = require('./controller/dashboardController')
-
+const login = require("./controller/loginController")
+const showPage = require('./controller/showPageController')
+const auth = require('./sevecies/auth')
+const cookieParser = require("cookie-parser");
+const logout = require("./controller/logout")
+const userFunction = require('./model/user')
+const resetPassword = require("./controller/resetPasswordController")
 
 const app = express();
 const PORT = 3000;
-const dataPath = path.join(__dirname, "data.json");
-// console.log(login.attemp())
 
+// app.use(auth.cookieParser); 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser())
 
-const readData = async () => {
-    const contents = await fs.readFile(dataPath, "utf8");
-    return JSON.parse(contents);
-};
 
-const writeData = async (data) => {
-    await fs.writeFile(dataPath, JSON.stringify(data, null, 2));
-};
 
-// GET all students
-app.get("/student",get.dashboard)
-app.get('/student/profile',get.profile)
+//create
+app.get("/register", showPage.create)
+app.post('/register', userFunction.create)
 //login
-app.get('/login',login.page,)
-app.post('/student',login.attemp );
-app.post('/student/profile',login.attemp)
+app.get('/login', auth.islogin, showPage.page,)
+app.post('/student', login.attemp);
 
+//forget
+app.get('/verifyemail', showPage.forget)
+app.post('/reset', resetPassword.emailForReset)
+app.get('/reset', auth.reset_password, showPage.reset)
+app.post('/login', resetPassword.reset)
 
-
-
-// GET single student by id
-app.get("/student/:id", async (req, res) => {
-    try {
-        const data = await readData();
-        const student = data.students.find(s => s.id == req.params.id);
-        if (!student) return res.status(404).send("Student not found");
-        res.render("user", student);
-        // res.redirect('/student/:id/edit',student)
-    } catch (err) {
-        res.status(500).send("Error loading student profile.");
-    }
-});
-
-// Create student
-app.post("/student", async (req, res) => {
-    const data = await readData();
-    data.students.push({ ...req.body, deleted_at: null });
-    await writeData(data);
-    res.redirect("/students");
-});
+// GET student dashboard
+app.get("/student", auth.checkGuest, auth.isAuthentication, showPage.dashboard)
+app.get('/student/profile', auth.checkGuest, auth.isAuthentication, showPage.profile)
 
 // Edit form
-app.get("/student/edit/:id",
-     async (req, res) => {
-    const data = await readData();
-    const student = data.students.find(s => s.id === req.params.id);
-    console.log(student)
-    if (!student) return res.status(404).send("Student not found");
-    res.render("edit", { student });
-}
-);
+app.get("/student/edit", auth.checkGuest, auth.isAuthentication, showPage.edit)
+app.post("/student/profile", auth.isAuthentication, userFunction.update)
 
+//logout
+app.get("/signin", logout.signout)
 
-// Update student
-app.put("/student/:id", async (req, res) => {
-    const data = await readData();
-    const index = data.students.findIndex(s => s.id === req.params.id);
-    if (index === -1) return res.status(404).send("Student not found");
-    data.students[index] = { ...data.students[index], ...req.body };
-    await writeData(data);
-    res.redirect("/student/:id");
-});
-
-
-//Delete
-app.delete("/student/:id", async (req, res) => {
-    const data = await readData();
-    const student = data.students.find(s => s.id === req.params.id);
-    if (!student) return res.status(404).send("Student not found");
-    student.deleted_at = new Date().toISOString();
-    await writeData(data);
-    res.redirect("/students");
-});
-
-app.listen(PORT, () => {
+//run
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
@@ -99,50 +55,3 @@ app.listen(PORT, () => {
 
 
 
-
-
-
-
-//commited code
-
-
-// login get and post
-// (req,res)=>{
-    // res.render('login',{err:null})}
-//     async (req, res) => {
-//     try {
-    //         const data = await readData();
-    //         const { email, password } = req.body || {};
-//         console.log(email, password);
-
-//         if (!email || !password) {
-    //             return res.status(400).send("Requirement not filled");
-//         }
-
-//         const stud = data.students.find(s => s.email === email.trim() && s.password === password.trim());
-//         console.log(stud);
-
-//         if (stud) {
-    //             res.render('dashboard', stud);
-//         } else {
-//              err = res.status(401).render('login',{err:"Incorrect username or password"});
-//         }
-//     } catch  {
-    //         return res.status(500).send("An error occurred while processing your request");
-//     }
-
-
-// show dashboard
-    //  async (req, res) => {
-    //     try {
-    //         const data = await readData();
-    //         const students = data.students.filter(s => !s.deleted_at);
-    //         const student = students.find(s => s.email === email.trim() && s.password === password.trim());
-    //         console.log(student)
-    //         res.render("dashboard", student );
-    //     } catch (err) {
-    //         res.status(500).send("Error reading student data.");
-    //     }
-    // }
-    // );
-// }

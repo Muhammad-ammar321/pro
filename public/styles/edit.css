@@ -1,9 +1,16 @@
 
+
+main {
+    max-width: 10rem auto;
+    margin: 24px ;
+    padding: 20px;
+}
+
 form {
-max-width: auto;
+/* width: 100%; */
 background-color: var(--surface);
-margin: 50px ;
-padding: 20px;
+/* margin: 50px ;
+padding: 20px; */
 border-radius: 8px;
 box-shadow: 10px 4px 8px rgba(0,0,0,0.06);
 }
@@ -40,7 +47,9 @@ img {
 p {
     margin: 5px 0 3px;
 }
-
+.personal-info {
+    margin-top: 20px;
+  }
 input[type="text"], input[type="number"],input[type="email"] {
     width: 99%;
     padding: 7px;
@@ -91,7 +100,30 @@ article {
 }
 
 .stud-pic{
-    width: 5000px;
+    width: 500px;
     border-radius: 50% ;
     border-color: rebeccapurple;
+}
+
+@media screen and (max-width:500px){
+    /* form {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    input[type="text"], input[type="number"],input[type="email"] {
+        width: 100%;
+        font-size: 14px;
+    }
+     */
+    input[type="submit"] {
+        width: 100%;
+        font-size: 18px;
+    }
+    
+    article {
+        margin-top: 15px;
+    }
+    
+    
 }

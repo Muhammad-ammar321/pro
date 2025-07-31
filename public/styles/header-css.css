@@ -90,3 +90,34 @@ button:hover {
   font-style: italic;
   font-weight: bolder;
 }
+
+@media screen and (max-width:500px) {
+  
+  button{
+    width: 100%;
+    max-width: 50px;
+  }
+  form {
+    width: 100%;
+    max-width: 16rem;
+    padding: 10px;
+  }
+
+  input[type="text"], input[type="number"],input[type="email"] {
+      width: 100%;
+      font-size: 14px;
+}
+
+  .stud_data{
+    width: 100%;
+    max-width: 10rem;
+    /* padding: 4rem; */
+    height: 5rem;
+  }
+  .stud-pic {
+  
+    width: 100%;
+    max-width: 100px;
+  }
+
+}

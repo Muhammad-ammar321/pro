@@ -1,20 +1,21 @@
+    <%- include('partials/log') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal</title>
-</head>
 
-<body>
-    
+<div class="box">
     <h1>Login</h1>
-    <% if (err) { %>
-        <div style="color: red;"><%= err %></div>
+    <% if (typeof err !== 'undefined' ) { %>
+        <span style="color: red;"><%= err %></span>
+    
+    <% } %>
+    <% if ( typeof mess !== 'undefined') { %>
+        <span style="color: green;"><%= mess %></span>
     <% } %>
     <form action="/student" method="POST">
         <input placeholder="Email" name="email" type="email" required />
+        <a href="/verifyemail">Forgot Password ?</a>
         <input placeholder="Password" name="password" type="password" required />
+        <a href="/register">Signup</a>
         <button>Login</button>
     </form>
-    <a href="forgot_password.html">Forgot Password ?</a>
-</body>
+</div>
+
