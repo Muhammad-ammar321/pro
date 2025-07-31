@@ -14,41 +14,47 @@ const readData = async () => {
 };
 
 
-module.exports = {
-    async create(req, res) {
-        res.render("register")
+module.exports= {
+    async page(req,res){
+        res.render('login',{err:null,mess:null})
     },
-    async forget(req, res) {
-        res.render("forgot_password")
+    async  create(req,res){
+        res.render("register",{err:null,mess:null})
+    },
+    async forget(req,res){
+        res.render("verify-email",{err:null,mess:null})
+    },
+    async reset(req,res){
+        res.render("reset-password",{err:null,mess:null})
     },
     async dashboard(req, res) {
         try {
             const data = await readData();
             const students = data.students.filter(s => !s.deleted_at);
-            const student = students.find(s => s.id === req.user.id)
+            const student = students.find(s=> s.id === req.user.id)
             // const student = students.find(s => s.email === email.trim() && s.password === password.trim());
-            res.render("dashboard", student);
+            res.render("dashboard", student );
         } catch (err) {
-            res.status(500).send("Error reading student data.");
+            res.status(500).send("Server error: Cannot read student data.");
         }
     },
     async profile(req, res) {
         try {
             const data = await readData();
             const student = data.students.find(s => s.id === req.user.id);
-            res.render("user", student);
+            res.render("user", student );
         } catch (err) {
-            res.status(500).send("Error reading student data.");
+            res.status(500).send("Server error: Cannot read student data.");
         }
     },
 
-    async edit(req, res) {
-        try {
+    async edit(req, res)  {
+       try {
             const data = await readData();
             const student = data.students.find(s => s.id === req.user.id);
-            res.render("edit", student);
+            res.render("edit", student );
         } catch (err) {
-            res.status(500).send("Error reading student data.");
+            res.status(500).send("Server error: Cannot read student data.");
         }
     }
 }

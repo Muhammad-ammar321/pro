@@ -1,56 +1,68 @@
- <%- include('partials/head')%>
- <link rel="stylesheet" href="/styles/edit.css">
-    <body class="box">
-              
-        <form action="#" method="patch"> 
+<%- include('partials/head')%>
+    <link rel="stylesheet" href="/styles/edit.css">
+
+<body class="box">
+        <main>
+        <form action="/student/profile" method="post">
             <h1>Student Profile</h1>
 
             <figure>
                 <h2>Student Picture</h2>
-                <img  src="https://img.icons8.com/color/27/test-account.png" alt="student-image" class="stud-pic" />
-                <input type="file" >
+                <img src="https://img.icons8.com/color/27/test-account.png" alt="student-image" class="stud-pic" />
+                <input type="file">
             </figure>
-            <article>
+            <article class="personal-info" >
                 <h2>Personal Information</h2>
-                
+
                 <label for="stud-name"><b>Full Name:</b></label>
-                <input type="text" id="stud-name" value="<%= student_name %>" placeholder="Enter your Full Name" />
-                
+                <input type="text" id="stud-name" name="student_name" pattern="[a-zA-Z]" value="<%= student_name %>"
+                    placeholder="Enter your Full Name" />
+
                 <label for="father-name.name"><b>Father Name:</b></label>
-                <input type="text" id="father-name" value="<%= father_name %>" placeholder="Enter your Father Name" />
-                
+                <input type="text" id="father-name" name="father_name" pattern="[a-zA-Z]" value="<%= father_name %>"
+                    placeholder="Enter your Father Name" />
+
                 <label for="roll-number"></label><b>Roll Number:</b>
-                <input type="number" id="roll-number" value="<%= id %>" placeholder="Enter your Roll Number" />
-                
+                <input type="text" id="roll-number" name="roll_number" pattern="[0-9]" value="<%= roll_number %>"
+                    placeholder="Enter your Roll Number" />
+
                 <label for="D.O.B"></label><b>Date Of Birth:</b>
-                <input type="text" id="D.O.B" value="<%= D_O_B %>" placeholder="Enter your Date of Birth" />
-                
+                <small style="display: none">Format: DD-MM-YYYY </small>
+                <input type="text" id="D.O.B" pattern="^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-\d{4}$" name="D_O_B"
+                    value="<%= D_O_B %>" placeholder="Enter your Date of Birth" />
+
                 <label for="cnic"><b>CNIC / B-Form:</b></label>
-                <input type="number" id="cinc" value="<%= cnic %>" placeholder="Enter your CNIC / B-Form" />
-                
+                <small style="display: none">Format: 1234-5678901 </small>
+                <input type="text" id="cinc" pattern="[0-9]{5}-[0-9]{7}-[0-9]{1}" name="cnic" value="<%= cnic %>"
+                    placeholder="Enter your CNIC / B-Form" />
+
                 <label for="email"><b>Email:</b></label>
-                <input type="email" id="email"  value="<%= email %>" placeholder="Enter your Email" />
-                
+                <input type="email" id="email" name="email" value="<%= email %>" placeholder="Enter your Email" />
+
                 <label for="phone"><b>Contact Number:</b></label>
-                <input type="number" id="phone" value="<%= phone_number %>" placeholder="Enter your Phone Number" />
+                <small style="display: none">Format: 1234-5678901 </small>
+                <input type="text" id="phone" pattern="[0-9]{4}-[0-9]{7}" name="phone_number"value="<%= phone_number %>" placeholder="Enter your Phone Number" />
+
+                <label for="course"><b>Course</b></label>
+                <input type="text" name="course_1" id="course" pattern="[a-zA-Z]" value="<%= course_1 %>">
             </article>
 
             <article>
-                    <h2>Student Data</h2>
+                <h2>Student Data</h2>
                 <figure>
                     <h3>Matric Marksheet</h3>
-                    <img src="" alt="matric-marksheet" />
+                    <img src="" class="stud_data" alt="matric-marksheet" />
                     <input type="file">
                 </figure>
                 <figure>
                     <h3>Intermediate Marksheet</h3>
-                    <img src="" alt="intermediate-marksheet" />
+                    <img class="stud_data" src="" alt="intermediate-marksheet" />
                     <input type="file">
                 </figure>
             </article>
 
             <input id="edit-form" type="submit" value="Submit" />
         </form>
-
-    <%- include('partials/footer')%>
-   
+    </main>    
+        <%- include('partials/footer')%>
+</body>

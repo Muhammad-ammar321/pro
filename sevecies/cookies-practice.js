@@ -9,13 +9,14 @@ const port =3001;
 
 
 
-const cookieParser=(headers)=>{
+module.exports={ cookieParser(headers){
     if(!headers.cookie) return {};
+    
     const cookieObj = {}
+    const cookiesArr = headers.cookie.split(';')
 
-    const cookiesArr = headers.cookie.split('; ')
     for(let i= 0;i < cookiesArr.length;i++){
-        const cookie = cookiesArr[i];
+        const cookie = cookiesArr[i].trim();
         const cookieArr =  cookie.split('=')
         cookieObj[cookieArr[0]] = cookieArr[1] 
     }
@@ -23,6 +24,22 @@ const cookieParser=(headers)=>{
     
 
 }
+}
+const kcookieParser = (headers) => {
+    if (!headers.cookie) return {};
+
+    const cookieObj = {};
+    const cookiesArr = headers.cookie.split(';');
+
+    for (let i = 0; i < cookiesArr.length; i++) {
+        const cookie = cookiesArr[i].trim();
+        const [key, ...val] = cookie.split('=');
+        if (!key || val.length === 0) continue;
+        cookieObj[key.trim()] = val.join('=').trim();
+    }
+
+    return cookieObj;
+};
 
 app.use((req,res,next)=>{
     const cookies = cookieParser(req.headers)

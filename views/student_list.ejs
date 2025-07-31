@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include(partials/head) %>
+<link rel="stylesheet" href="styles/user.css">
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>Roll Number</td>
+                <td>Student Name</td>
+                <td>course</td>
+                <td>action</td>
+            </tr>
+        </thead>
+        <% for(let i = 0; i < students.length -1 ; i++) %>
+        <tbody>
+            <tr>
+                <td><%= roll_number %></td>
+                <td><%= student_name %></td>
+                <td><%= course %></td>
+                <td><img src="https://img.icons8.com/matisse/30/view.png" alt="student_profile"></td>
+                <td><img src="https://img.icons8.com/color-pixels/32/trash.png" alt="delete_student"></td>
+                
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

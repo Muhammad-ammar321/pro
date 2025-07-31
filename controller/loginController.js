@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs/promises");
 const path = require("path");
+const jwt = require('jsonwebtoken')
 
 const app = express();
 app.use(express.urlencoded({}))
@@ -10,12 +11,12 @@ const dataPath = path.join(__dirname, "../data.json");
 
 const readData = async () => {
     const contents = await fs.readFile(dataPath, "utf8");
-    // console.log(contents);
     return JSON.parse(contents);
 };
 
 const sessionId = Math.ceil(Math.random() * 10000)
 
+const secret = "🤫 no data"
   
 
 
@@ -24,34 +25,45 @@ module.exports= {
         
         res.render('login',{err:null})
         
+        
     },
     async attemp (req,res){
-        
-        
-            try {
-                const data = await readData();
-                // console.log(data)
-                const { email, password } = req.body || {};
-                // console.log(email, password);
-        
-                if (!email || !password) {
-                    return res.status(400).send("Requirement not filled");
-                }
-        
-                const stud = data.students.find(s => s.email === email.trim() && s.password === password.trim());
-                // console.log(stud);
-        
-                if (stud) {
-                    res.render('dashboard', stud);
-                } else {
-                     return res.status(401).render('login',{err:"Incorrect username or password"});
-                }
-            } catch  {
-                return res.status(500).send("An error occurred while processing your request");
-            }
+        const { email, password } = req.body || {};
+        if (!email || !password) {
+            return res.status(400).send("Requirement not filled");
         }
         
+        
+        try {
+            const data = await readData();
+            const students = data.students.filter(s => !s.deleted_at);
+
+    
+    
+            const student = students.find(s => s.email === email.trim() && s.password === password.trim());
+    
+            if (student) {
+                const token = jwt.sign({id:student.id},secret,{expiresIn:60*60})
+                
+                res.cookie("token",token,{httpOnly:true}) 
+                res.render("dashboard",student)
+            } else {
+                    return res.status(401).render('login',{err:"Incorrect username or password"});
+            }
+        } catch  {
+            return res.status(500).send("An error occurred while login");
+        }
+     }
+        
 }
+
+
+//bot id:miboco5211@0tires.com  , pass: miboco5211@0tires.co
+
+
+
+//commited code made by bot
+
 
 // const express = require("express");
 // const fs = require("fs/promises");
