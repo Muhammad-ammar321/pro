@@ -80,6 +80,7 @@ button:hover {
   display: flex;
   justify-items:auto ;
   position: absolute;
+  gap: 1rem;
   top: 7rem ;
   left: 20px ;
 }

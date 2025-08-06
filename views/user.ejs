@@ -2,8 +2,11 @@
 <link rel="stylesheet" href="/styles/user.css">
 
 <body class="box">
-       
-
+   <% if(typeof err !== 'undefined' ){ %>    
+    <scriprt>
+      alert("<%= err %>")
+    </script>
+    <% } %>
     <main >
         
         <h1>Student Profile</h1>
@@ -24,7 +27,7 @@
           <div><strong>CNIC / B-Form:</strong><span id="cnic"><%= cnic %></span></div>
           <div><strong>Email Address:</strong><span id="email"><%= email %></span></div>
           <div ><strong>Phone Number:</strong><span id="phone"><%= phone_number %></span></div>
-          <div><strong>Course:</strong><span id="course"><%= course_1 %></span></div>
+          <div><strong>Course:</strong><span id="course"><%= course %></span></div>
                                                                
         </div>
       </section>

@@ -32,8 +32,6 @@ module.exports = {
             const lastStudent = data.students[data.students.length - 1];
             newId = lastStudent.id + 1;
         }
-
-
             const newStudent = { id : newId, ...req.body, deleted_at: null };  
             data.students.push(newStudent);  
 
@@ -56,18 +54,40 @@ module.exports = {
         await writeData(data);
         return res.redirect("/student/profile")
     },
-
-    async destroy(req, res) {
-        const id = req.params.id;
-        try {
-            const data = readData()
-            const student = data.students.find(s => s.id === req.user.id);
-            if (!student) return;
-            student.deleted_at = new Date()
-            await writeData(data)
-            res.status(203).send('user deleted')
-        } catch (error) {
-            return error.message
+async destroy(req, res) {
+    const id = Number(req.params.id);
+    try {
+        const data = await readData();
+        const student = data.students.find(s => s.id === id);
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>",student)
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>",id)
+        
+        if (!student) {
+            return res.status(404).send("Student not found");
         }
+
+        student.deleted_at = new Date();
+        await writeData(data);
+
+        res.status(200).send("Student deleted successfully");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server Error: Cannot delete user");
     }
+}
+
+    // async destroy(req, res) {
+    //     const id = req.params.id;
+    //     try {
+    //         const data = readData()
+    //         const student = data.students.find(s => s.id === id);
+    //         if (!student) return res.render('student_list',{err:"Can't find student"});
+
+    //         student.deleted_at = new Date()
+    //         await writeData(data)
+    //         res.status(203).send('user deleted')
+    //     } catch (err) {
+    //         return err.message
+    //     }
+    // }
 }

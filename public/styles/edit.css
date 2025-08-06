@@ -2,20 +2,19 @@
 
 main {
     max-width: 10rem auto;
-    margin: 24px ;
+    /* margin: 24px ; */
     padding: 20px;
 }
 
 form {
 /* width: 100%; */
 background-color: var(--surface);
-/* margin: 50px ;
-padding: 20px; */
+margin: 50px ;
+padding: 20px;
 border-radius: 8px;
 box-shadow: 10px 4px 8px rgba(0,0,0,0.06);
 }
 
-    
 h1 {
         color: var(--primary);
         border-bottom: 2px solid var(--secondary);
@@ -38,7 +37,6 @@ figure {
 img {
     width: 100%;
     max-width: 300px;
-    height: auto;
     border: 2px solid var(--border);
     border-radius: 4px;
 }
@@ -49,7 +47,7 @@ p {
 }
 .personal-info {
     margin-top: 20px;
-  }
+}
 input[type="text"], input[type="number"],input[type="email"] {
     width: 99%;
     padding: 7px;
@@ -104,18 +102,23 @@ article {
     border-radius: 50% ;
     border-color: rebeccapurple;
 }
-
+.stud_data{
+    height: 100px;
+    
+}
 @media screen and (max-width:500px){
-    /* form {
+    form {
         width: 100%;
-        padding: 10px;
+        padding: 9px;
+        margin: 9px;
+        
     }
     
     input[type="text"], input[type="number"],input[type="email"] {
         width: 100%;
         font-size: 14px;
     }
-     */
+    
     input[type="submit"] {
         width: 100%;
         font-size: 18px;

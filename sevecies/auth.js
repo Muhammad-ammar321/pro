@@ -2,10 +2,11 @@ const express = require("express");
 const fs = require("fs/promises");
 const path = require("path");
 const jwt = require('jsonwebtoken');
-const { reset } = require("../controller/showPageController");
+const { error } = require("console");
+// const { reset } = require("../controller/showPageController");
 
 const secret = "🤫 no data"
-const resetPss="Reset "
+const resetPss="reset password"
 module.exports = {
     sessions: {
 
@@ -48,7 +49,7 @@ module.exports = {
             req.user = verified
             next()
         } catch (err) {
-            return res.status(403).render('login', { err: "Server error: Cannot sent email" });
+            return res.status(403).render('verify-email', { err: "Server error: Cannot sent email" });
         }
     },
     attempLogin(req, res, next) {

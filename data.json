@@ -10,8 +10,7 @@
       "email": "asd@a.com",
       "password": "1234",
       "phone_number": "098764322",
-      "course_1": "PSDC-1",
-      "deleted_at": null
+      "course": "PSDC-1"
     },
     {
       "id": 2,
@@ -23,8 +22,19 @@
       "phone_number": "1970-2584068",
       "email": "gisek57794@cristout.com",
       "password": "1234",
-      "course_1": "Shopify",
-      "deleted_at": null
+      "course": "Shopify"
+    },
+    {
+      "id": 3,
+      "student_name": "nn",
+      "father_name": "kjl",
+      "roll_number": "12",
+      "D_O_B": "12-12-1212",
+      "cnic": "54645-5418856-1",
+      "phone_number": "5455-1123456",
+      "email": "areeb@f.com",
+      "password": "1234",
+      "course": "PSDC-2"
     }
   ]
 }

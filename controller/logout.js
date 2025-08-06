@@ -12,13 +12,11 @@ module.exports={
     signout(req,res){
         const token = req.cookies.token
         try {
-            
             if(token){
                 res.clearCookie('token')
                 return res.redirect("/login")
             }else{
                 return res.status(403).render('login', { err: "Invalid or expired token" });
-
             }
         } 
         catch (error) {
