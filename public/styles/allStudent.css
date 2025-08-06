@@ -67,3 +67,14 @@ th {
 tr:hover {
     background-color: #771b2fa8;
 }
+.delete{
+    /* display: flex;
+    flex-flow: column wrap; */
+    background: none;
+    border: none;
+    right: 4.5rem;
+
+}
+.delete:hover{
+    background: none;
+}
